@@ -50,8 +50,12 @@ def generate():
 
     while assets != []:
         for item in assets:
-            y = int(random()*len(field))
-            x = int(random()*len(field))
+            while 1:
+                y = int(random()*len(field))
+                x = int(random()*len(field))
+                if field[y][x] != "DI":
+                    continue
+                break
             field[y][x] = item
             assets.remove(item)
             
