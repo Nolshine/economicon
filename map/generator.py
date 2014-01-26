@@ -36,30 +36,25 @@ def generate():
               "FR",
               "FR"]
     default_asset = "DI"
+    size = 16 #desired square size of map
     
     print "creating playfield..."
     field = []
-    for i in range(16):
+    for i in range(size):
         field.append([])
-
-    for line in field:
-        print line
 
     print "filling playfield..."
     for y in field:
-        for i in range(16):
+        for i in range(size):
             y.append(default_asset)
 
     while assets != []:
-        for y in range(16):
-            if assets == []:
-                break
-            for x in range(16):
-                if assets == []:
-                    break
-                num = random()
-                if num > 0.99:
-                    field[y][x] = assets.pop(0)
+        for item in assets:
+            y = int(random()*len(field))
+            x = int(random()*len(field))
+            field[y][x] = item
+            assets.remove(item)
+            
 
 ##Everything under here is debug messaging
     print "the map looks like:"
