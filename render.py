@@ -2,8 +2,8 @@ if __name__ == "__main__":
     import pygame
     from pygame.locals import *
 
-    from field.generator import generate
-    testfield = generate()
+    from field_generator import generate_field
+    testfield = generate_field()
 
 
 
