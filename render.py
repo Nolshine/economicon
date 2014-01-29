@@ -18,11 +18,9 @@ def render_field(field):
     for y in range(size):
         for x in range(len(field)):
             position = (x*32, y*32)
-            #below is a test render, showing positioning
-            rec = pygame.Rect(position[0], position[1], 32, 32)
-            pygame.draw.rect(screen, (255,255,255), rec)
-            rec = pygame.Rect(position[0]+1, position[1]+1, 30, 30)
-            pygame.draw.rect(screen, (0,0,0), rec)
+            screen.blit(field[y][x].sprite, position)
+    pygame.display.update()
+            
 
 
 
@@ -47,7 +45,6 @@ if __name__ == "__main__":
                     raise KeyboardInterrupt
             print "rendering..."
             render_field(testfield)
-            pygame.display.flip()
             
         except(KeyboardInterrupt):
             pygame.quit()

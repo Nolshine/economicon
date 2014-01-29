@@ -1,79 +1,42 @@
-#####################
-#                   #
-#   MAP GENERATOR   #
-#                   #
-#####################
-
 # importing important modules
-
 from random import random, choice
 
+#if testing from here, we'll need pygame elements
+if __name__ == "__main__":
+    import pygame
+    from pygame.locals import *
+    
+#import the Tile class because we need it to generate.   
+from entities import Tile
 
-
-
-
-"""
-This module generates an 16x16 economic map. It makes an 16x16 grid and
-iterates over it repeatedly until all gameplay elements from a predefined
-list are 'spent' on the playing field. Then it returns the generated map.
-
-PB = Player Base
-AA = Alien Artefact
-EB = Enemy Base
-GD = Gold Deposit
-FR = FoRest
-DI = DIrt
-"""
-
-def generate_field():
-    print "creating assets to be distributed..."
-    assets = ["PB",
-              "AA",
-              "EB",
-              "GD",
-              "GD",
-              "FR",
-              "FR",
-              "FR"]
-    default_asset = "DI"
-    size = 16 #desired square size of map
+def generate_field(size = 16):
+    
+    size = size #desired square size of map
     
     print "creating playfield..."
     field = []
+    print "populating with dug out dirt..."
     for i in range(size):
         field.append([])
-
-    print "filling playfield..."
-    for y in field:
-        for i in range(size):
-            y.append(default_asset)
-
-    while assets != []:
-        for item in assets:
-            while 1:
-                y = int(random()*len(field))
-                x = int(random()*len(field))
-                if field[y][x] != "DI":
-                    continue
-                break
-            field[y][x] = item
-            assets.remove(item)
-            
-
-##Everything under here is debug messaging
-    print "the map looks like:"
-    for line in field:
-        print_line = ""
-        for item in line:
-            print_line += "["+item+"]"
-        print print_line
+        for n in range(size):
+            field[i].append(Tile())
+    print "done. (Possibly) creating undug dirt..."
+    for row in field:
+        for tile in row:
+            if random() > 0.7:
+                tile.flip()
+    print "done."
 
     return field
 
 if __name__ == "__main__":
-    print "generating 10 maps"
-    for i in range(10):
-        field = generate()
-        print ""
-    
-    
+    field = generate_field()
+    print "This is what it looks like in numbers:"
+    for row in field:
+        to_print = ""
+        for tile in row:
+            to_print += ("["+str(tile.is_dug)+"]")
+        print to_print
+    print "Cells marked [0] are undug cells."
+    print "Cells marked [1] are cells that are dug out."
+    print "Test complete."

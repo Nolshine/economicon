@@ -1,6 +1,5 @@
-if __name__ == "__main__":
-    import pygame
-    from pygame.locals import *
+import pygame
+from pygame.locals import *
 
 
 class Tile:
@@ -16,7 +15,15 @@ class Tile:
 
     def __init__(self, is_dug = 1):
         self.is_dug = is_dug
-        self.sprite = Tile.spritesheet[is_dug]
+        self.sprite = Tile.spritesheet[self.is_dug]
+
+    def flip(self):
+        if self.is_dug:
+            self.is_dug = 0
+            self.sprite = Tile.spritesheet[self.is_dug]
+        else:
+            self.is_dug = 1
+            self.sprite = Tile.spritesheet[self.is_dug]
 
 
 if __name__ == "__main__":
