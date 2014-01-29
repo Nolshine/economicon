@@ -35,8 +35,8 @@ if __name__ == "__main__":
     for row in field:
         to_print = ""
         for tile in row:
-            to_print += ("["+str(tile.is_dug)+"]")
+            to_print += ("["+str(tile.is_filled)+"]")
         print to_print
-    print "Cells marked [0] are undug cells."
-    print "Cells marked [1] are cells that are dug out."
+    print "Cells marked [1] are undug cells."
+    print "Cells marked [0] are cells that are dug out."
     print "Test complete."
