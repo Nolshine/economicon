@@ -51,6 +51,8 @@ if __name__ == "__main__":
     #default camera position currently at (x, y) = (0,0)
     cam_pos = [0, 0]
 
+    shiftkey = False
+
     while 1:
         try:
             frames += 1
@@ -63,19 +65,36 @@ if __name__ == "__main__":
                 #this is because I'm working with tiles,
                 #and I'm not yet sure how to do smooth
                 #tile-scrolling yet.
+                if event.type == KEYUP:
+                    if event.key == K_LSHIFT or event.key == K_RSHIFT:
+                        shiftkey = False
                 if event.type == KEYDOWN:
+                    if event.key == K_LSHIFT or event.key == K_RSHIFT:
+                        shiftkey = True
+                    if shiftkey:
+                        inc = 4
+                        dec = 4
+                    else:
+                        inc = 1
+                        dec = 1
                     if event.key == K_a:
-                        if cam_pos[0] > 0:
-                            cam_pos[0] -= 1
+                        cam_pos[0] -= dec
                     if event.key == K_d:
-                        if cam_pos[0] < (len(testfield))-16:
-                            cam_pos[0] += 1
+                        cam_pos[0] += inc
                     if event.key == K_w:
-                        if cam_pos[1] > 0:
-                            cam_pos[1] -= 1
+                        cam_pos[1] -= dec
                     if event.key == K_s:
-                        if cam_pos[1] < (len(testfield))-16:
-                            cam_pos[1] += 1
+                        cam_pos[1] += inc
+                if cam_pos[0] < 0:
+                    cam_pos[0] = 0
+                if cam_pos[0] > (len(testfield)-16):
+                    cam_pos[0] = (len(testfield)-16)
+                if cam_pos[1] < 0:
+                    cam_pos[1] = 0
+                if cam_pos[1] > (len(testfield)-16):
+                    cam_pos[1] = (len(testfield)-16)
+                
+
             pygame.display.set_caption("rendering... frames: "+str(frames)+" cam: "+str(cam_pos))
             render_field(testfield, cam_pos)
             
