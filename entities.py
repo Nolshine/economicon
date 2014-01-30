@@ -1,3 +1,5 @@
+from random import choice
+
 import pygame
 from pygame.locals import *
 
@@ -15,15 +17,27 @@ class Tile:
 
     def __init__(self, is_filled = 1):
         self.is_filled = is_filled
+        tmp_choice = choice([0,1,2,3])
         self.sprite = Tile.spritesheet[self.is_filled]
+        if tmp_choice != 0:
+            for i in range(tmp_choice):
+                self.sprite = pygame.transform.rotate(self.sprite, 90)
 
     def flip(self):
         if self.is_filled:
             self.is_filled = 0
+            tmp_choice = choice([0,1,2,3])
             self.sprite = Tile.spritesheet[self.is_filled]
+            if tmp_choice != 0:
+                for i in range(tmp_choice):
+                    self.sprite = pygame.transform.rotate(self.sprite, 90)
         else:
             self.is_filled = 1
+            tmp_choice = choice([0,1,2,3])
             self.sprite = Tile.spritesheet[self.is_filled]
+            if tmp_choice != 0:
+                for i in range(tmp_choice):
+                    self.sprite = pygame.transform.rotate(self.sprite, 90)
 
 
 if __name__ == "__main__":
