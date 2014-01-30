@@ -11,7 +11,10 @@ from entities import Tile
 
 def generate_field(size = 16):
     
-    size = size #desired square size of map
+    size = size #desired square size of map (in # of tiles)
+    #field must ALWAYS be 16x16 tiles minimum.
+    if size < 16:
+        size = 16
     
     print "creating playfield..."
     field = []
@@ -20,10 +23,10 @@ def generate_field(size = 16):
         field.append([])
         for n in range(size):
             field[i].append(Tile())
-    print "done. (Possibly) creating undug dirt..."
+    print "done. (Probably) creating undug dirt..."
     for row in field:
         for tile in row:
-            if random() > 0.7:
+            if random() < 0.7:
                 tile.flip()
     print "done."
 
