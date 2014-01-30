@@ -36,14 +36,16 @@ if __name__ == "__main__":
     screen = init_display(testfield)
 
     clock = pygame.time.Clock()
+    frames = 0
 
     while 1:
         try:
+            frames += 1
             clock.tick(60)
             for event in pygame.event.get():
                 if event.type == QUIT:
                     raise KeyboardInterrupt
-            print "rendering..."
+            pygame.display.set_caption("rendering... frames elapsed: "+str(frames))
             render_field(testfield)
             
         except(KeyboardInterrupt):
