@@ -77,13 +77,13 @@ if __name__ == "__main__":
                     else:
                         inc = 1
                         dec = 1
-                    if event.key == K_a:
+                    if event.key == K_a or event.key == K_LEFT:
                         cam_pos[0] -= dec
-                    if event.key == K_d:
+                    if event.key == K_d or event.key == K_RIGHT:
                         cam_pos[0] += inc
-                    if event.key == K_w:
+                    if event.key == K_w or event.key == K_UP:
                         cam_pos[1] -= dec
-                    if event.key == K_s:
+                    if event.key == K_s or event.key == K_DOWN:
                         cam_pos[1] += inc
                 if cam_pos[0] < 0:
                     cam_pos[0] = 0
